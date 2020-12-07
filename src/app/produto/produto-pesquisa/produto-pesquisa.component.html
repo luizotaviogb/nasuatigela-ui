@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="ui-g">
+
+      <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+        <div class="ui-g-12">
+          <h1>Produtos</h1>
+        </div>
+
+        <div class="ui-g-12 ui-fluid" >
+            <label>Descrição</label>
+            <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+        </div>
+
+        <div class="ui-g-12 ui-fluid" >
+          <label>De: </label>
+          <input  pInputText type="text" name="valor" placeholder="0,00" name="valor" currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" [(ngModel)]="filtro.produtoValorDe">
+        </div>
+
+        <div class="ui-g-12 ui-fluid" >
+            <label>Até: </label>
+            <input pInputText type="text" name="valor2" placeholder="0,00" name="valor" currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" [(ngModel)]="filtro.produtoValorAte">
+          </div>
+
+        <div class="ui-g-12">
+          <button pButton type="submit" label="Pesquisar"></button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+
+        <p-table [value]="produtos" [responsive]="true"
+          [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+          (onLazyLoad)="aoMudarPagina($event)"
+          #tabela>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-produto>
+              <tr>
+                <td>{{ produto.codigo }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.valor }}</td>
+                <td class="col-acoes-content">
+
+                  <a pButton class="espaco-icones" icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                    [routerLink]="['/produtos', produto.codigo]"></a>
+                  <button pButton class="espaco-icones" icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+                    (click)="confirmarExclusao(produto)"
+                    [disabled]="!auth.temPermissao('ROLE_PESQUISAR_PRODUTO')"></button>
+
+              </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                Nenhum produto encontrada
+            </ng-template>
+          </p-table>
+      </div>
+      <div class="ui-g-12">
+        <a pButton label="Cadastrar produto" routerLink="/produtos/novo"></a>
+      </div>
+
+    </div>
+  </div>

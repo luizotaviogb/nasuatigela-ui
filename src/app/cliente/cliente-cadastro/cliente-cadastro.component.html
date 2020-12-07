@@ -1,0 +1,40 @@
+<div class="container">
+    <form #f="ngForm" autocomplete="off"  (ngSubmit)="salvar(f)">
+  
+      <div class="ui-g">
+        <div class="ui-g-12">
+            <h1>{{ editando ? 'Edição de' : 'Nova' }} Pessoa</h1>
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label>Nome</label>
+          <input pInputText type="text" name="nome"
+            [(ngModel)]="pessoa.nome"
+            #nome="ngModel" required minlength="5">
+  
+          <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+          <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres."></app-message>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+            <label>Endereço</label>
+            <input pInputText type="text" name="endereco"
+              [(ngModel)]="pessoa.endereco"
+              #nome="ngModel" required minlength="15">
+    
+            <app-message [control]="nome" error="required" text="Informe o nome"></app-message>
+            <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres."></app-message>
+          </div>
+        
+        
+
+  
+        <div class="ui-g-12">
+          <button class="espaco-icones" pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+          <button class="espaco-icones" pButton type="button" label="Novo" class="p-button-info espaco-botoes"
+            (click)="novo(f)"></button>
+          <a class="espaco-icones" routerLink="/pessoas">Voltar para a pesquisa</a>
+        </div>
+      </div>
+  
+    </form>
+  </div>

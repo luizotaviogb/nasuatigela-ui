@@ -1,0 +1,30 @@
+<div class="container">
+
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+    
+        <div class="p-grid">
+            <h1>Cadastro de produto</h1>
+        </div>
+
+        <div class="p-col-6 p-md 9 ui fluid">
+            <label>Descrição: </label>
+            <input pInputText type ="text" name="nome" [(ngModel)]="produto.nome">
+        </div>
+
+        <div class="p-col-6 p-md 9 ui fluid">
+            <label>Valor: </label>
+            <input pInputText type="text" placeholder="0,00" name="valor" currencyMask
+                    [options]="{prefix:'R$',thousand:'.',decimal:',',allowNegative:false}"
+                     [(ngModel)]="produto.valor">
+                    
+        </div>
+
+        <div class="p-col-12">
+            <button pButton type="submit" label="Salvar"></button>
+            <button pButton type="button" label="Novo" class="p-button-info espaco-botoes" (click)="novo(f)"></button>
+            <a class="espaco-icones" href="javascript:;">Voltar para a pesquisa</a>
+        </div>
+
+</form>
+
+</div>

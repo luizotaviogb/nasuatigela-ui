@@ -1,0 +1,57 @@
+<div class="container">
+    <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+  
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <h1> Vendas</h1>
+        </div>
+  
+  
+        <div class="ui-g-6 ui-md-3 ui-fluid">
+          <label>Data</label>
+          <p-calendar dateFormat="dd/mm/yy" name="data" [inline]="false" [readonlyInput]="false" [showIcon]="false"
+          formControlName="data"></p-calendar>
+        </div>
+        
+        <div class="ui-g-12 ui-md-9 ui-fluid">
+          <label>Cliente</label>
+          <input pInputText type="text" name="cliente"
+            formControlName="cliente" >
+
+        </div>
+
+        <div class="ui-g-12 ui-md-9 ui-fluid">
+            <label>Produto</label>
+            <input pInputText type="text" name="produto"
+              formControlName="produto" >
+  
+          </div>
+
+          <div class="ui-g-12 ui-md-9 ui-fluid">
+            <label>Quantidade</label>
+            <input pInputText type="text" name="quantidade"
+              formControlName="quantidade" >
+  
+          </div>
+
+        <div class="ui-g-12 ui-md-3 ui-fluid">
+          <label>Valor</label>
+          <input pInputText type="text" name="valor" placeholder="0,00" name="valor" currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }"
+            formControlName="valor">
+        </div>
+  
+       
+  
+        
+  
+        <div class="ui-g-12">
+          <button class="espaco-icones" pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
+          <button class="espaco-icones" pButton type="button" label="Novo" class="p-button-info espaco-botoes"
+            (click)="novo()"></button>
+          <a class="espaco-icones" routerLink="/vendas">Voltar para a pesquisa</a>
+        </div>
+      </div>
+  
+    </form>
+  </div>
